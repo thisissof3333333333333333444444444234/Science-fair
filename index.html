@@ -18,9 +18,9 @@
             max-width: 500px;
             margin: 0 auto;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding-bottom: 80px; /* Space for the bottom menu */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding-bottom: 80px; 
         }
         h1 { color: #1b5e20; }
         
@@ -34,136 +34,161 @@
             display: flex;
             justify-content: center;
             padding: 15px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
         }
         .nav-bar button {
             background-color: transparent;
             color: white;
             border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
+            padding: 10px 15px;
+            margin: 0 5px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
         .nav-bar button:hover, .nav-bar button.active {
             background-color: #4caf50;
+            transform: translateY(-3px);
         }
 
-        /* Hide sections by default */
-        .section { display: none; }
+        .section { display: none; animation: fadeIn 0.5s; }
         .section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Calculator Styles */
         select, input {
-            padding: 10px; margin: 10px 0; width: 80%;
-            border: 1px solid #ccc; border-radius: 6px; font-size: 16px;
+            padding: 12px; margin: 10px 0; width: 85%;
+            border: 2px solid #a5d6a7; border-radius: 8px; font-size: 16px; outline: none;
         }
+        select:focus, input:focus { border-color: #4caf50; }
+        
         .btn-main {
             background-color: #4caf50; color: white; border: none;
-            padding: 12px 24px; font-size: 16px; border-radius: 6px;
-            cursor: pointer; margin-top: 15px;
+            padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px;
+            cursor: pointer; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
         }
-        .btn-main:hover { background-color: #388e3c; }
+        .btn-main:hover { background-color: #388e3c; transform: scale(1.05); }
+        
         .result-box {
-            margin-top: 20px; padding: 15px; background-color: #f1f8e9;
-            border-radius: 8px; border: 1px solid #c5e1a5;
+            margin-top: 25px; padding: 20px; background-color: #f1f8e9;
+            border-radius: 12px; border: 2px dashed #8bc34a;
         }
-        #voltageDisplay { font-size: 24px; font-weight: bold; color: #d32f2f; }
+        #voltageDisplay { font-size: 32px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
 
-        /* Learn & Fun Styles */
+        /* Learn Section - Entertaining Visuals */
         .info-card {
-            background-color: #f9fbe7; border-left: 5px solid #8bc34a;
-            padding: 15px; margin-bottom: 15px; text-align: left;
+            background-color: #f9fbe7; border-left: 6px solid #8bc34a;
+            padding: 15px; margin-bottom: 20px; text-align: left; border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: 0.3s;
         }
-        .quiz-question { margin-top: 20px; font-weight: bold; }
+        .info-card:hover { transform: scale(1.02); background-color: #f0f4c3; }
+        
+        .circuit-diagram {
+            display: flex; justify-content: center; align-items: center;
+            background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 15px 0;
+            font-size: 24px; font-weight: bold; border: 2px solid #4caf50;
+        }
+        .circuit-arrow { color: #fbc02d; margin: 0 10px; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        /* Fun Zone (Quiz) Styles */
+        .quiz-container {
+            background: #fff9c4; padding: 20px; border-radius: 12px;
+            border: 2px solid #fbc02d; margin-top: 20px;
+        }
+        .quiz-question { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #f57f17; }
         .quiz-btn {
-            background-color: #fff; color: #2e7d32; border: 2px solid #4caf50;
-            padding: 10px; margin: 5px; border-radius: 5px; cursor: pointer; width: 80%;
+            display: block; width: 100%; background-color: white; color: #333;
+            border: 2px solid #fbc02d; padding: 12px; margin: 8px 0;
+            border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold;
+            transition: 0.2s;
         }
-        .quiz-btn:hover { background-color: #e8f5e9; }
+        .quiz-btn:hover { background-color: #fff59d; }
+        
+        /* Quiz Animations */
+        .shake { animation: shake 0.4s; }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+        
+        .winner-text { font-size: 28px; color: #2e7d32; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Design for Sustainability</h1>
-        <p>Harnessing Renewable Energy from Organic Fruit Waste</p>
-        <hr>
+        <h1>🌱 Fruit Power App</h1>
+        <p>Harnessing Renewable Energy from Organic Fruit Waste!</p>
+        <hr style="border: 1px solid #c8e6c9;">
 
         <div id="calculatorTab" class="section active">
-            <h3>🔋 Power Calculator</h3>
+            <h3>⚡ Power Calculator</h3>
             <p>Select a fruit waste to see how much voltage it generates!</p>
             <select id="fruitType">
-                <option value="0.91">Lemon Waste (0.91V)</option>
-                <option value="0.85">Pineapple Waste (0.85V)</option>
-                <option value="0.78">Orange Waste (0.78V)</option>
-                <option value="0.62">Potato Waste (0.62V)</option>
+                <option value="0.91">🍋 Lemon Waste (0.91V)</option>
+                <option value="0.85">🍍 Pineapple Waste (0.85V)</option>
+                <option value="0.78">🍊 Orange Waste (0.78V)</option>
+                <option value="0.62">🥔 Potato Waste (0.62V)</option>
             </select><br>
             <input type="number" id="fruitCount" placeholder="Number of fruits (e.g., 3)" min="1"><br>
             <button class="btn-main" onclick="calculateVoltage()">Calculate Voltage</button>
             <div class="result-box">
                 <p>Total Estimated Voltage:</p>
                 <p id="voltageDisplay">0.00 V</p>
-                <p id="funFact"></p>
+                <p id="funFact">Enter a number to see the magic!</p>
             </div>
         </div>
 
         <div id="learnTab" class="section">
-            <h3>📚 How It Works</h3>
+            <h3>📖 How It Works</h3>
+            
+            <div class="circuit-diagram">
+                🔩 Zinc <span class="circuit-arrow">➡️ ⚡ ➡️</span> 🍋 Acid <span class="circuit-arrow">➡️ ⚡ ➡️</span> 🟤 Copper
+            </div>
+
             <div class="info-card">
-                <strong>The Electrolyte:</strong><br>
-                Fruits contain natural acids (like citric acid in lemons). This acid acts as an electrolyte, a liquid that allows electricity to flow!
+                <strong>🧪 The Electrolyte:</strong><br>
+                Fruits contain natural acids (like citric acid in lemons). This acid acts as an electrolyte, a magical liquid that allows electricity to flow!
             </div>
             <div class="info-card">
-                <strong>The Electrodes:</strong><br>
-                We use two different metals: a Zinc nail and a Copper plate. The acid in the fruit pushes electrons from the zinc to the copper, creating an electrical current.
+                <strong>🔋 The Electrodes:</strong><br>
+                We use two different metals: a <b>Zinc nail</b> and a <b>Copper plate</b>. The acid in the fruit pushes electrons from the zinc to the copper, creating an electrical current.
             </div>
             <div class="info-card">
-                <strong>Why Food Waste?</strong><br>
-                Instead of throwing away old fruit skins and cores, we can use their stored chemical energy to power small electronics safely, helping to protect our planet!
+                <strong>🌍 Why Food Waste?</strong><br>
+                Instead of throwing away old fruit skins and cores, we can use their stored chemical energy to power small electronics cleanly and safely!
             </div>
         </div>
 
         <div id="funTab" class="section">
             <h3>🎮 Science Quiz</h3>
-            <p>Test your knowledge based on our project board!</p>
+            <p>Test your knowledge! Can you get a perfect score?</p>
             
-            <div id="quiz1">
-                <p class="quiz-question">1. Which fruit waste produced the highest voltage in our test?</p>
-                <button class="quiz-btn" onclick="checkAnswer(1, false)">Pineapple</button>
-                <button class="quiz-btn" onclick="checkAnswer(1, true)">Lemon</button>
-                <button class="quiz-btn" onclick="checkAnswer(1, false)">Orange</button>
-                <p id="feedback1"></p>
-            </div>
-
-            <div id="quiz2" style="display:none; margin-top:20px;">
-                <p class="quiz-question">2. What part of the fruit helps the electricity move?</p>
-                <button class="quiz-btn" onclick="checkAnswer(2, false)">The seeds</button>
-                <button class="quiz-btn" onclick="checkAnswer(2, true)">The natural acids</button>
-                <button class="quiz-btn" onclick="checkAnswer(2, false)">The sugar</button>
-                <p id="feedback2"></p>
+            <div class="quiz-container" id="quizContainer">
+                <p id="questionText" class="quiz-question">Loading question...</p>
+                <div id="optionsContainer"></div>
+                <p id="quizFeedback" style="font-weight: bold; margin-top: 15px;"></p>
             </div>
         </div>
 
     </div>
 
     <div class="nav-bar">
-        <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">Calculator</button>
-        <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">Learn</button>
-        <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">Fun Zone</button>
+        <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">🧮 Calc</button>
+        <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">📖 Learn</button>
+        <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">🎮 Play</button>
     </div>
 
     <script>
         // --- Navigation Logic ---
         function switchTab(tabId, btnId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            // Remove active class from all buttons
             document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
-            
-            // Show the selected section and highlight the button
             document.getElementById(tabId).classList.add('active');
             document.getElementById(btnId).classList.add('active');
         }
@@ -182,28 +207,111 @@
             document.getElementById("voltageDisplay").innerText = totalVoltage + " Volts";
 
             let factText = "";
-            if (fruitVoltage === 0.91) { factText = "Lemons have high citric acid, which makes them the best electrolyte!"; }
-            else if (totalVoltage >= 2.0) { factText = "Wow! That is enough voltage to light up a standard red LED!"; }
-            else { factText = "Keep adding more fruit to generate more power!"; }
+            if (fruitVoltage === 0.91) { factText = "🏆 Lemons win! Their high citric acid makes them the best electrolyte!"; }
+            else if (totalVoltage >= 2.0) { factText = "💡 Wow! That is enough voltage to light up a standard red LED!"; }
+            else { factText = "🔋 Keep adding more fruit to generate more power!"; }
             
             document.getElementById("funFact").innerText = factText;
         }
 
-        // --- Quiz Logic ---
-        function checkAnswer(questionNum, isCorrect) {
-            let feedback = document.getElementById("feedback" + questionNum);
-            if (isCorrect) {
-                feedback.innerText = "✅ Correct!";
+        // --- Dynamic Quiz Logic ---
+        const quizData = [
+            {
+                question: "1. Which fruit waste produced the highest voltage in our test?",
+                options: ["Pineapple", "Lemon", "Orange", "Potato"],
+                correctAnswer: "Lemon"
+            },
+            {
+                question: "2. What part of the fruit acts as the 'electrolyte' to help electricity move?",
+                options: ["The seeds", "The sugar", "The natural acids", "The skin"],
+                correctAnswer: "The natural acids"
+            },
+            {
+                question: "3. What two metals did we use to make the battery work?",
+                options: ["Gold & Silver", "Iron & Aluminum", "Zinc & Copper", "Plastic & Glass"],
+                correctAnswer: "Zinc & Copper"
+            },
+            {
+                question: "4. What is the main goal of our project?",
+                options: ["To make fruit juice", "To harness renewable energy from waste", "To grow bigger lemons", "To invent a new metal"],
+                correctAnswer: "To harness renewable energy from waste"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuiz() {
+            const qData = quizData[currentQuestionIndex];
+            document.getElementById("questionText").innerText = qData.question;
+            document.getElementById("quizFeedback").innerText = "";
+            
+            const optionsContainer = document.getElementById("optionsContainer");
+            optionsContainer.innerHTML = ""; // Clear old buttons
+
+            // Create a button for each option
+            qData.options.forEach(option => {
+                let btn = document.createElement("button");
+                btn.innerText = option;
+                btn.className = "quiz-btn";
+                btn.onclick = () => checkAnswer(option, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedOption, buttonElement) {
+            const correctAnswer = quizData[currentQuestionIndex].correctAnswer;
+            const feedback = document.getElementById("quizFeedback");
+
+            if (selectedOption === correctAnswer) {
+                // Correct Answer!
+                buttonElement.style.backgroundColor = "#8bc34a";
+                buttonElement.style.color = "white";
+                feedback.innerText = "✅ Awesome! Get ready for the next one...";
                 feedback.style.color = "green";
-                // Show next question if there is one
-                if(questionNum === 1) {
-                    document.getElementById("quiz2").style.display = "block";
-                }
+                
+                // Wait 1.5 seconds, then load the next question
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < quizData.length) {
+                        loadQuiz();
+                    } else {
+                        showWinnerScreen();
+                    }
+                }, 1500);
+
             } else {
-                feedback.innerText = "❌ Try again! Read our display board for a hint.";
+                // Wrong Answer!
+                buttonElement.classList.add("shake");
+                feedback.innerText = "❌ Oops! Try again.";
                 feedback.style.color = "red";
+                
+                // Remove shake class so it can shake again if clicked
+                setTimeout(() => buttonElement.classList.remove("shake"), 400);
             }
         }
+
+        function showWinnerScreen() {
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = `
+                <div class="winner-text">🎉 You are a Fruit Power Expert! 🎉</div>
+                <p style="font-size: 18px; margin-top:20px;">You answered all questions correctly. Thanks for learning about green energy with us!</p>
+                <button class="btn-main" onclick="resetQuiz()">Play Again</button>
+            `;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = `
+                <p id="questionText" class="quiz-question"></p>
+                <div id="optionsContainer"></div>
+                <p id="quizFeedback" style="font-weight: bold; margin-top: 15px;"></p>
+            `;
+            loadQuiz();
+        }
+
+        // Load the first question when the page starts
+        loadQuiz();
     </script>
 
 </body>
