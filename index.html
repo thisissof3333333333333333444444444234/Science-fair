@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Battery Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1b5e20;
+        }
+        select, input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-radius: 8px;
+            border: 1px solid #c5e1a5;
+        }
+        #voltageDisplay {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Design for Sustainability</h1>
+        <p>Harnessing Renewable Energy from Organic Fruit Waste</p>
+        
+        <h3>Fruit Power Calculator</h3>
+        <p>Select a fruit waste and enter how many cells you are connecting to calculate the total voltage!</p>
+
+        <select id="fruitType">
+            <option value="0.91">Lemon Waste (0.91V)</option>
+            <option value="0.85">Pineapple Waste (0.85V)</option>
+            <option value="0.78">Orange Waste (0.78V)</option>
+            <option value="0.62">Potato Waste (0.62V)</option>
+        </select>
+
+        <br>
+
+        <input type="number" id="fruitCount" placeholder="Enter number of fruits (e.g., 3)" min="1">
+
+        <br>
+
+        <button onclick="calculateVoltage()">Calculate Voltage</button>
+
+        <div class="result-box">
+            <p>Total Estimated Voltage:</p>
+            <p id="voltageDisplay">0.00 V</p>
+            <p id="funFact"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateVoltage() {
+            // Get the selected fruit voltage and the number of fruits
+            let fruitVoltage = parseFloat(document.getElementById("fruitType").value);
+            let count = parseInt(document.getElementById("fruitCount").value);
+
+            // Ensure the user entered a valid number
+            if (isNaN(count) || count <= 0) {
+                alert("Please enter a valid number of fruits!");
+                return;
+            }
+
+            // Calculate total voltage
+            let totalVoltage = (fruitVoltage * count).toFixed(2);
+            document.getElementById("voltageDisplay").innerText = totalVoltage + " Volts";
+
+            // Add a fun fact based on the hypothesis and results
+            let factText = "";
+            if (fruitVoltage === 0.91) {
+                factText = "Lemons have high citric acid, which makes them the best electrolyte in our test!";
+            } else if (totalVoltage >= 2.0) {
+                factText = "Wow! That is enough voltage to light up a standard red LED!";
+            } else {
+                factText = "Keep adding more fruit! The acid helps electricity move between the zinc and copper.";
+            }
+            
+            document.getElementById("funFact").innerText = factText;
+        }
+    </script>
+
+</body>
+</html>
