@@ -24,7 +24,7 @@
         h1 { color: #1b5e20; margin-bottom: 5px; }
         .subtitle { color: #558b2f; font-size: 14px; margin-top: 0; margin-bottom: 20px; }
         
-        /* New TOP Navigation Bar (No longer blocking the view!) */
+        /* Top Navigation Bar */
         .nav-bar {
             background-color: #1b5e20;
             display: flex;
@@ -50,13 +50,13 @@
             background-color: #4caf50;
         }
 
-        /* Section visibility handles */
+        /* Section Visibility */
         .section { display: none; animation: fadeIn 0.4s; }
         .section.active { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Calculator Layout */
+        /* Calculator Styles */
         select, input {
             padding: 12px; margin: 10px 0; width: 85%;
             border: 2px solid #a5d6a7; border-radius: 8px; font-size: 16px; outline: none;
@@ -77,7 +77,7 @@
         }
         #voltageDisplay { font-size: 32px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
 
-        /* Learn Section - Visuals */
+        /* Learn Section */
         .info-card {
             background-color: #f9fbe7; border-left: 6px solid #8bc34a;
             padding: 15px; margin-bottom: 15px; text-align: left; border-radius: 0 8px 8px 0;
@@ -115,7 +115,7 @@
 
     <div class="container">
         <h1>🌱 Fruit Power App</h1>
-        <p class="subtitle">Design for Sustainability: Organic Fruit Waste Energy</p>
+        <p class="subtitle">Exploring Green Energy from Organic Fruit Waste</p>
 
         <div class="nav-bar">
             <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">🧮 Calc</button>
@@ -125,7 +125,7 @@
 
         <div id="calculatorTab" class="section active">
             <h3>⚡ Power Calculator</h3>
-            <p>Select a fruit waste to see how much voltage it generates!</p>
+            <p>Select a fruit to calculate its estimated energy output!</p>
             <select id="fruitType">
                 <option value="0.91">🍋 Lemon Waste (0.91V)</option>
                 <option value="0.85">🍍 Pineapple Waste (0.85V)</option>
@@ -150,15 +150,15 @@
 
             <div class="info-card">
                 <strong>🧪 The Electrolyte:</strong><br>
-                Fruits contain natural acids (like citric acid in lemons)[cite: 9, 16]. This acid acts as an electrolyte, a specialized liquid that allows electricity to flow[cite: 16]!
+                Many fruits contain natural juices like citric acid. This fluid acts as an electrolyte, allowing electricity to travel through it!
             </div>
             <div class="info-card">
                 <strong>🔋 The Electrodes:</strong><br>
-                We use two different metals: a <b>Zinc nail</b> and a <b>Copper plate</b>[cite: 23]. The acid in the fruit triggers a chemical reaction that forces electrons to flow from the zinc to the copper, creating an electrical current[cite: 16, 40].
+                We use two special metals: a Zinc nail and a Copper plate. The acidity triggers a reaction that forces electrons to travel from the zinc over to the copper, generating an electric current.
             </div>
             <div class="info-card">
                 <strong>🌍 Why Food Waste?</strong><br>
-                Instead of throwing away old fruit skins and cores, we can reuse their stored chemical energy to power small electronics cleanly and safely[cite: 8, 43, 45]!
+                Instead of putting fruit cores and peels in the trash, we can use their chemical properties to power small devices in an eco-friendly way!
             </div>
         </div>
 
@@ -176,7 +176,7 @@
     </div>
 
     <script>
-        // --- Navigation Logic ---
+        // Tab switching logic
         function switchTab(tabId, btnId) {
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
@@ -184,7 +184,7 @@
             document.getElementById(btnId).classList.add('active');
         }
 
-        // --- Calculator Logic ---
+        // Voltage calculator logic
         function calculateVoltage() {
             let fruitVoltage = parseFloat(document.getElementById("fruitType").value);
             let count = parseInt(document.getElementById("fruitCount").value);
@@ -198,34 +198,34 @@
             document.getElementById("voltageDisplay").innerText = totalVoltage + " Volts";
 
             let factText = "";
-            if (fruitVoltage === 0.91) { factText = "🏆 Lemons win! Their high citric acid makes them the best electrolyte! [cite: 16, 38, 39]"; }
-            else if (totalVoltage >= 2.0) { factText = "💡 Wow! That is enough voltage to light up a standard red LED! [cite: 45]"; }
-            else { factText = "🔋 Keep adding more fruit cells to generate more power! [cite: 31]"; }
+            if (fruitVoltage === 0.91) { factText = "🏆 Lemons win! Their high citric acid makes them an amazing electrolyte!"; }
+            else if (totalVoltage >= 2.0) { factText = "💡 Awesome! You have enough voltage to light up a standard red LED!"; }
+            else { factText = "🔋 Keep adding more fruit cells to generate extra power!"; }
             
             document.getElementById("funFact").innerText = factText;
         }
 
-        // --- Quiz Questions ---
+        // Quiz questions data
         const quizData = [
             {
-                question: "1. Which fruit waste produced the highest voltage in our test? [cite: 12]",
+                question: "1. Which fruit generated the highest voltage during the experiment?",
                 options: ["Pineapple", "Lemon", "Orange", "Potato"],
                 correctAnswer: "Lemon"
             },
             {
-                question: "2. What part of the fruit acts as the 'electrolyte' to help electricity move? [cite: 16]",
+                question: "2. What internal part of the fruit helps the electric current move?",
                 options: ["The seeds", "The sugar", "The natural acids", "The skin"],
                 correctAnswer: "The natural acids"
             },
             {
-                question: "3. What two metals did we use to make the battery cells work? [cite: 23]",
+                question: "3. What two specific metals were used to build the battery cells?",
                 options: ["Gold & Silver", "Iron & Aluminum", "Zinc & Copper", "Plastic & Glass"],
                 correctAnswer: "Zinc & Copper"
             },
             {
-                question: "4. What is the main goal of our sustainable project? [cite: 3, 4]",
-                options: ["To make fruit juice", "To harness renewable energy from waste", "To grow bigger lemons", "To invent a new metal"],
-                correctAnswer: "To harness renewable energy from waste"
+                question: "4. What is the primary purpose of this sustainable project?",
+                options: ["To make fruit juice", "To get clean energy from waste", "To grow bigger lemons", "To invent a new metal"],
+                correctAnswer: "To get clean energy from waste"
             }
         ];
 
@@ -280,7 +280,7 @@
             const container = document.getElementById("quizContainer");
             container.innerHTML = `
                 <div class="winner-text">🎉 Fruit Power Expert! 🎉</div>
-                <p style="font-size: 16px; margin-top:15px;">You crushed the quiz. Thanks for exploring clean energy loops with us! [cite: 43]</p>
+                <p style="font-size: 16px; margin-top:15px;">You crushed the quiz. Thanks for exploring clean energy loops with us!</p>
                 <button class="btn-main" onclick="resetQuiz()">Play Again</button>
             `;
         }
