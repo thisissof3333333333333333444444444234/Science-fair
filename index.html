@@ -111,17 +111,17 @@
 
     <div class="container">
         <h1>Fruit Power App</h1>
-        <p class="subtitle">Exploring Green Energy from Organic Fruit Waste</p>
+        <p class="subtitle">Making Clean Energy from Leftover Fruit Waste</p>
 
         <div class="nav-bar">
             <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">Calculator</button>
-            <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">Learn</button>
+            <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">How it Works</button>
             <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">Quiz</button>
         </div>
 
         <div id="calculatorTab" class="section active">
             <h3>Power Calculator</h3>
-            <p>Select a fruit cell to calculate its estimated energy output.</p>
+            <p>Pick a fruit to see how much power it can make.</p>
             <select id="fruitType">
                 <option value="0.91">Lemon Waste (0.91V)</option>
                 <option value="0.85">Pineapple Waste (0.85V)</option>
@@ -131,43 +131,43 @@
             <input type="number" id="fruitCount" placeholder="Number of fruits (e.g., 3)" min="1"><br>
             <button class="btn-main" onclick="calculateVoltage()">Calculate Voltage</button>
             <div class="result-box">
-                <p>Total Estimated Voltage:</p>
+                <p>Total Voltage:</p>
                 <p id="voltageDisplay">0.00 V</p>
-                <p id="funFact">Enter a number to see the result.</p>
+                <p id="funFact">Type a number to see the result.</p>
             </div>
         </div>
 
         <div id="learnTab" class="section">
-            <h3>The Science Behind It</h3>
+            <h3>The Science Secret</h3>
             
             <div class="circuit-diagram">
-                Zinc Anode ---> Fruit Acid ---> Copper Cathode
+                From Zinc to Acid to Copper
             </div>
 
             <div class="info-card">
-                <strong>The Anode (Zinc Nail):</strong><br>
-                Zinc is a metal that gives away its electrons easily. When the acidic fruit juice touches the zinc nail, a chemical reaction starts. This reaction breaks down the zinc atoms, leaving behind negatively charged electrons.
+                <strong>The Zinc Nail:</strong><br>
+                Zinc is a metal that gives away its power easily. When the sour fruit juice touches the zinc nail, a reaction starts. This leaves behind tiny negative particles called electrons.
             </div>
             
             <div class="info-card">
-                <strong>The Electrolyte (Fruit Acid):</strong><br>
-                The natural juices in the fruit (like citric acid) act as an electrolyte. The acid's job is to conduct electricity and interact with the metals to keep the chemical reaction going.
+                <strong>The Fruit Acid:</strong><br>
+                The natural juice inside the fruit acts as a helper called an electrolyte. The acid lets electricity move and keeps the reaction going.
             </div>
 
             <div class="info-card">
-                <strong>The Cathode (Copper Plate):</strong><br>
-                Copper strongly attracts electrons. Since the electrons are crowded on the zinc nail, they travel through our connecting wires to get to the copper plate, creating an electric current.
+                <strong>The Copper Plate:</strong><br>
+                Copper pulls electrons toward it. Because the electrons are crowded on the zinc nail, they rush through the wires to get to the copper plate.
             </div>
 
             <div class="info-card">
-                <strong>The Circuit:</strong><br>
-                That continuous flow of electrons—moving from the Zinc, through the wires, and into the Copper—is exactly what electricity is. By connecting them, we turn chemical energy into electrical energy.
+                <strong>The Complete Circuit:</strong><br>
+                When electrons move from the zinc, through the wires, and into the copper, they form an electric current. This moving line of electrons is what we call electricity.
             </div>
         </div>
 
         <div id="funTab" class="section">
             <h3>Science Quiz</h3>
-            <p>Test your knowledge based on our project.</p>
+            <p>Test what you learned!</p>
             
             <div class="quiz-container" id="quizContainer">
                 <p id="questionText" class="quiz-question">Loading question...</p>
@@ -201,9 +201,9 @@
             document.getElementById("voltageDisplay").innerText = totalVoltage + " Volts";
 
             let factText = "";
-            if (fruitVoltage === 0.91) { factText = "Lemons produced the most power due to their high citric acid content."; }
-            else if (totalVoltage >= 2.0) { factText = "This is enough voltage to potentially light up a small standard red LED."; }
-            else { factText = "Connecting more fruit cells in a series will increase the total voltage."; }
+            if (fruitVoltage === 0.91) { factText = "Lemons made the most power because they are very sour."; }
+            else if (totalVoltage >= 2.0) { factText = "This is enough voltage to light up a small red LED light."; }
+            else { factText = "Adding more fruits in a line will make the voltage higher."; }
             
             document.getElementById("funFact").innerText = factText;
         }
@@ -211,24 +211,24 @@
         // Quiz questions data
         const quizData = [
             {
-                question: "1. Which fruit generated the highest voltage during the experiment?",
+                question: "1. Which fruit made the highest voltage in our test?",
                 options: ["Pineapple", "Lemon", "Orange", "Potato"],
                 correctAnswer: "Lemon"
             },
             {
-                question: "2. What internal part of the fruit acts as the 'Electrolyte'?",
+                question: "2. What part inside the fruit acts as the electrolyte?",
                 options: ["The seeds", "The sugar", "The natural acids", "The skin"],
                 correctAnswer: "The natural acids"
             },
             {
-                question: "3. In our battery, which metal acts as the Anode (giving away electrons)?",
+                question: "3. Which metal gives away the electrons?",
                 options: ["Copper", "Zinc", "Iron", "Gold"],
                 correctAnswer: "Zinc"
             },
             {
-                question: "4. What is the primary purpose of this sustainable project?",
-                options: ["To make fruit juice", "To get clean energy from waste", "To grow bigger lemons", "To invent a new metal"],
-                correctAnswer: "To get clean energy from waste"
+                question: "4. What is the main goal of this green project?",
+                options: ["To make fruit juice", "To make clean energy from trash", "To grow bigger lemons", "To invent a new metal"],
+                correctAnswer: "To make clean energy from trash"
             }
         ];
 
@@ -258,7 +258,7 @@
             if (selectedOption === correctAnswer) {
                 buttonElement.style.backgroundColor = "#4caf50";
                 buttonElement.style.color = "white";
-                feedback.innerText = "Correct! Loading next question...";
+                feedback.innerText = "Correct! Next question...";
                 feedback.style.color = "green";
                 
                 setTimeout(() => {
@@ -271,7 +271,7 @@
                 }, 1200);
 
             } else {
-                feedback.innerText = "Incorrect. Please try again.";
+                feedback.innerText = "Not quite. Try again!";
                 feedback.style.color = "red";
             }
         }
@@ -280,7 +280,7 @@
             const container = document.getElementById("quizContainer");
             container.innerHTML = `
                 <div class="winner-text">Quiz Complete!</div>
-                <p style="font-size: 16px; margin-top:10px;">You have successfully completed the Science Quiz. Thank you for learning about our project.</p>
+                <p style="font-size: 16px; margin-top:10px;">You finished the quiz! Thanks for learning about our project.</p>
                 <button class="btn-main" onclick="resetQuiz()">Restart Quiz</button>
             `;
         }
