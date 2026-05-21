@@ -51,7 +51,7 @@
         }
 
         /* Section Visibility */
-        .section { display: none; animation: fadeIn 0.3s; }
+        .section { display: none; animation: fadeIn 0.4s; }
         .section.active { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -73,7 +73,7 @@
         
         .result-box {
             margin-top: 25px; padding: 20px; background-color: #f1f8e9;
-            border-radius: 8px; border: 1px solid #8bc34a;
+            border-radius: 8px; border: 2px dashed #8bc34a;
         }
         #voltageDisplay { font-size: 32px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
 
@@ -83,26 +83,33 @@
             padding: 15px; margin-bottom: 15px; text-align: left;
             font-size: 15px; line-height: 1.5;
         }
+        
+        /* The Cool Animated Arrows! */
         .circuit-diagram {
             display: flex; justify-content: center; align-items: center;
             background: #e8f5e9; padding: 12px; border-radius: 6px; margin: 15px 0;
-            font-size: 18px; font-weight: bold; border: 1px solid #4caf50;
+            font-size: 18px; font-weight: bold; border: 2px solid #4caf50;
             color: #1b5e20;
         }
+        .circuit-arrow { color: #fbc02d; margin: 0 8px; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* Quiz Styles */
         .quiz-container {
-            background: #f1f8e9; padding: 20px; border-radius: 8px;
-            border: 1px solid #a5d6a7; margin-top: 10px;
+            background: #fff9c4; padding: 20px; border-radius: 8px;
+            border: 2px solid #fbc02d; margin-top: 10px;
         }
-        .quiz-question { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #1b5e20; }
+        .quiz-question { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #f57f17; }
         .quiz-btn {
             display: block; width: 100%; background-color: white; color: #333;
-            border: 1px solid #a5d6a7; padding: 12px; margin: 8px 0;
-            border-radius: 6px; cursor: pointer; font-size: 16px;
+            border: 2px solid #fbc02d; padding: 12px; margin: 8px 0;
+            border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold;
             transition: 0.2s;
         }
-        .quiz-btn:hover { background-color: #e8f5e9; }
+        .quiz-btn:hover { background-color: #fff59d; }
+        
+        .shake { animation: shake 0.4s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-6px); } }
         
         .winner-text { font-size: 24px; color: #2e7d32; font-weight: bold; margin-bottom: 10px; }
     </style>
@@ -110,30 +117,30 @@
 <body>
 
     <div class="container">
-        <h1>Fruit Power App</h1>
+        <h1>🌱 Fruit Power App</h1>
         <p class="subtitle">Making Clean Energy from Leftover Fruit Waste</p>
 
         <div class="nav-bar">
-            <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">Calculator</button>
-            <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">How it Works</button>
-            <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">Quiz</button>
+            <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">🧮 Calculator</button>
+            <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">📖 How it Works</button>
+            <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">🎮 Quiz</button>
         </div>
 
         <div id="calculatorTab" class="section active">
-            <h3>Power Calculator</h3>
+            <h3>⚡ Power Calculator</h3>
             <p>Pick a fruit to see how much power it can make.</p>
             <select id="fruitType">
-                <option value="0.91">Lemon Waste (0.91V)</option>
-                <option value="0.85">Pineapple Waste (0.85V)</option>
-                <option value="0.78">Orange Waste (0.78V)</option>
-                <option value="0.62">Potato Waste (0.62V)</option>
+                <option value="0.91">🍋 Lemon Waste (0.91V)</option>
+                <option value="0.85">🍍 Pineapple Waste (0.85V)</option>
+                <option value="0.78">🍊 Orange Waste (0.78V)</option>
+                <option value="0.62">🥔 Potato Waste (0.62V)</option>
             </select><br>
             <input type="number" id="fruitCount" placeholder="Number of fruits (e.g., 3)" min="1"><br>
             <button class="btn-main" onclick="calculateVoltage()">Calculate Voltage</button>
             <div class="result-box">
                 <p>Total Voltage:</p>
                 <p id="voltageDisplay">0.00 V</p>
-                <p id="funFact">Type a number to see the result.</p>
+                <p id="funFact">Type a number to see the result!</p>
             </div>
         </div>
 
@@ -141,7 +148,7 @@
             <h3>The Science Secret</h3>
             
             <div class="circuit-diagram">
-                From Zinc to Acid to Copper
+                🔩 Zinc <span class="circuit-arrow">➡️ ⚡ ➡️</span> Acid <span class="circuit-arrow">➡️ ⚡ ➡️</span> 🟤 Copper
             </div>
 
             <div class="info-card">
@@ -161,7 +168,7 @@
 
             <div class="info-card">
                 <strong>The Complete Circuit:</strong><br>
-                When electrons move from the zinc, through the wires, and into the copper, they form an electric current. This moving line of electrons is what we call electricity.
+                When electrons move from the zinc, through the wires, and into the copper, they form an electric current. This moving line of electrons is what we call electricity!
             </div>
         </div>
 
@@ -202,7 +209,7 @@
 
             let factText = "";
             if (fruitVoltage === 0.91) { factText = "Lemons made the most power because they are very sour."; }
-            else if (totalVoltage >= 2.0) { factText = "This is enough voltage to light up a small red LED light."; }
+            else if (totalVoltage >= 2.0) { factText = "💡 This is enough voltage to light up a small red LED light!"; }
             else { factText = "Adding more fruits in a line will make the voltage higher."; }
             
             document.getElementById("funFact").innerText = factText;
@@ -258,7 +265,7 @@
             if (selectedOption === correctAnswer) {
                 buttonElement.style.backgroundColor = "#4caf50";
                 buttonElement.style.color = "white";
-                feedback.innerText = "Correct! Next question...";
+                feedback.innerText = "✅ Correct! Next question...";
                 feedback.style.color = "green";
                 
                 setTimeout(() => {
@@ -271,15 +278,18 @@
                 }, 1200);
 
             } else {
-                feedback.innerText = "Not quite. Try again!";
+                buttonElement.classList.add("shake");
+                feedback.innerText = "❌ Not quite. Try again!";
                 feedback.style.color = "red";
+                
+                setTimeout(() => buttonElement.classList.remove("shake"), 400);
             }
         }
 
         function showWinnerScreen() {
             const container = document.getElementById("quizContainer");
             container.innerHTML = `
-                <div class="winner-text">Quiz Complete!</div>
+                <div class="winner-text">🎉 Quiz Complete!</div>
                 <p style="font-size: 16px; margin-top:10px;">You finished the quiz! Thanks for learning about our project.</p>
                 <button class="btn-main" onclick="resetQuiz()">Restart Quiz</button>
             `;
