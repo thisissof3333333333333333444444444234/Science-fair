@@ -3,293 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science Fair: The Lemon Battery Experiment</title>
+    <title>Fruit Power App</title>
     <style>
-        :root {
-            --primary-color: #2c5282;
-            --secondary-color: #ed8936;
-            --background-light: #f7fafc;
-            --text-color: #2d3748;
-            --text-muted: #4a5568;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
-            color: white;
+            background-color: #e8f5e9;
+            color: #2e7d32;
             text-align: center;
-            padding: 40px 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
             margin: 0;
-            font-size: 2.5em;
-        }
-
-        header p {
-            margin: 10px 0 0 0;
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 8px;
-            margin-top: 0;
-        }
-
-        .materials-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .material-item {
-            background: var(--background-light);
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-
-        .step-list {
-            padding-left: 20px;
-        }
-
-        .step-list li {
-            margin-bottom: 12px;
-        }
-
-        /* How it works grid styling */
-        .battery-explanation {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .step-card {
-            padding: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .zinc-card { background-color: #f7fafc; border-left: 4px solid #718096; }
-        .acid-card { background-color: #fffaf0; border-left: 4px solid #ecc94b; }
-        .copper-card { background-color: #fff5f5; border-left: 4px solid #dd6b20; }
-        .electricity-card { background-color: #ebf8ff; border-left: 4px solid #3182ce; }
-
-        .step-card h3 { margin: 0 0 8px 0; font-size: 1.2em; }
-        .zinc-card h3 { color: #2d3748; }
-        .acid-card h3 { color: #b7791f; }
-        .copper-card h3 { color: #c05621; }
-        .electricity-card h3 { color: #2b6cb0; }
-
-        /* Interactive prediction box style */
-        .prediction-box {
-            background-color: #f4f9ff;
-            border: 2px dashed #3182ce;
             padding: 20px;
-            border-radius: 10px;
-            margin: 25px 0;
-            text-align: center;
         }
-
-        .prediction-btn {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #3182ce;
+        .container {
+            background-color: white;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1b5e20; margin-bottom: 5px; }
+        .subtitle { color: #558b2f; font-size: 14px; margin-top: 0; margin-bottom: 20px; }
+        
+        /* Top Navigation Bar */
+        .nav-bar {
+            background-color: #1b5e20;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+        .nav-bar button {
+            background-color: transparent;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 12px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
+            border-radius: 4px;
+            flex: 1;
+            margin: 0 4px;
             transition: 0.2s;
         }
-
-        .prediction-btn:hover {
-            background-color: #2b6cb0;
+        .nav-bar button:hover, .nav-bar button.active {
+            background-color: #4caf50;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9em;
+        /* Section Visibility */
+        .section { display: none; animation: fadeIn 0.3s; }
+        .section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Calculator Styles */
+        select, input {
+            padding: 12px; margin: 10px 0; width: 85%;
+            border: 2px solid #a5d6a7; border-radius: 6px; font-size: 16px; outline: none;
         }
+        select:focus, input:focus { border-color: #4caf50; }
+        
+        .btn-main {
+            background-color: #4caf50; color: white; border: none;
+            padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 6px;
+            cursor: pointer; margin-top: 15px;
+            transition: 0.2s;
+        }
+        .btn-main:hover { background-color: #388e3c; }
+        
+        .result-box {
+            margin-top: 25px; padding: 20px; background-color: #f1f8e9;
+            border-radius: 8px; border: 1px solid #8bc34a;
+        }
+        #voltageDisplay { font-size: 32px; font-weight: bold; color: #d32f2f; margin: 10px 0; }
+
+        /* Learn Section */
+        .info-card {
+            background-color: #f9fbe7; border-left: 5px solid #8bc34a;
+            padding: 15px; margin-bottom: 15px; text-align: left;
+            font-size: 15px; line-height: 1.5;
+        }
+        .circuit-diagram {
+            display: flex; justify-content: center; align-items: center;
+            background: #e8f5e9; padding: 12px; border-radius: 6px; margin: 15px 0;
+            font-size: 18px; font-weight: bold; border: 1px solid #4caf50;
+            color: #1b5e20;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: #f1f8e9; padding: 20px; border-radius: 8px;
+            border: 1px solid #a5d6a7; margin-top: 10px;
+        }
+        .quiz-question { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #1b5e20; }
+        .quiz-btn {
+            display: block; width: 100%; background-color: white; color: #333;
+            border: 1px solid #a5d6a7; padding: 12px; margin: 8px 0;
+            border-radius: 6px; cursor: pointer; font-size: 16px;
+            transition: 0.2s;
+        }
+        .quiz-btn:hover { background-color: #e8f5e9; }
+        
+        .winner-text { font-size: 24px; color: #2e7d32; font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>⚡ The Lemon Battery Project 🍋</h1>
-        <p>Generating Clean Energy from Citric Acid</p>
-    </header>
-
     <div class="container">
+        <h1>Fruit Power App</h1>
+        <p class="subtitle">Exploring Green Energy from Organic Fruit Waste</p>
 
-        <section id="introduction">
-            <h2>💡 Project Overview & Question</h2>
-            <p>Can we generate enough usable electrical energy from everyday citrus fruits to power a small electronic device? This project explores the principles of electrochemistry by turning a standard lemon into a working voltaic cell.</p>
-            <p><strong>The Big Question:</strong> How does the number of lemons connected in a series circuit affect the total voltage output produced?</p>
-        </section>
-
-        <section id="hypothesis">
-            <h2>🔮 Hypothesis</h2>
-            <p>If we increase the number of lemons connected together in a series circuit, then the total voltage generated will increase proportionally. This happens because each lemon acts as an individual cell, adding its electrical potential to the total circuit loop.</p>
-        </section>
-
-        <section id="materials">
-            <h2>📦 Materials Needed</h2>
-            <div class="materials-list">
-                <div class="material-item">🍋 4 Fresh Lemons</div>
-                <div class="material-item">🔩 4 Galvanized Zinc Nails</div>
-                <div class="material-item">🟤 4 Copper Coins/Wires</div>
-                <div class="material-item">🔌 Alligator Clip Wires</div>
-                <div class="material-item">📟 Digital Multimeter</div>
-                <div class="material-item">💡 Low-voltage LED Light</div>
-            </div>
-        </section>
-
-        <section id="procedure">
-            <h2>🔬 Experimental Procedure</h2>
-            <ol class="step-list">
-                <li>Gently roll the lemons on a flat surface to break the internal juice pouches (this helps the acid flow freely inside).</li>
-                <li>Insert one galvanized zinc nail and one copper piece into each lemon, making sure they are close together but <strong>not touching</strong> each other.</li>
-                <li>Turn on your digital multimeter and connect the leads to the zinc (negative) and copper (positive) terminals of a single lemon to measure the baseline voltage.</li>
-                <li>Connect multiple lemons together in a series chain using alligator clips (connect the zinc of lemon 1 to the copper of lemon 2, and so on).</li>
-                <li>Measure the final combined voltage output and attempt to hook up the free ends of the wire circuit to the LED light.</li>
-            </ol>
-        </section>
-
-        <section id="how-it-works">
-            <h2>⚙️ How the Chemical Reaction Works</h2>
-            <p style="margin-bottom: 20px;">
-                The connection between the metals and the juice triggers a chemical reaction that forces electrons to travel. Here is exactly what happens at every stage:
-            </p>
-            
-            <div class="battery-explanation">
-                <div class="step-card zinc-card">
-                    <h3>🔩 1. Zinc (The Electron Giver)</h3>
-                    <p style="margin: 0;">
-                        The zinc nail acts as the <strong>anode</strong> (the negative electrode). Zinc is a highly reactive metal that easily sheds extra weight. When placed in the lemon, it begins to dissolve slightly. Each zinc atom leaves behind two electrons and enters the juice as a zinc ion (Zn<sup>2+</sup>).
-                    </p>
-                </div>
-
-                <div class="step-card acid-card">
-                    <h3>🍋 2. Acid (The Chemical Highway)</h3>
-                    <p style="margin: 0;">
-                        The citric acid inside the lemon acts as the <strong>electrolyte</strong>. It contains positively charged hydrogen ions (H<sup>+</sup>). While the acid itself doesn't carry electricity out of the lemon, it serves as a chemical highway that allows ions to move freely, keeping internal charges perfectly balanced.
-                    </p>
-                </div>
-
-                <div class="step-card copper-card">
-                    <h3>🟤 3. Copper (The Electron Receiver)</h3>
-                    <p style="margin: 0;">
-                        The copper coin acts as the <strong>cathode</strong> (the positive electrode). Copper strongly attracts electrons. When electrons arrive at the copper, they combine with the hydrogen ions (H<sup>+</sup>) from the acid to create tiny, visible bubbles of hydrogen gas (H<sub>2</sub>).
-                    </p>
-                </div>
-
-                <div class="step-card electricity-card">
-                    <h3>⚡ 4. The Electricity (The Flow)</h3>
-                    <p style="margin: 0;">
-                        Because zinc pushes electrons away and copper pulls them in, an atomic tug-of-war is created. When you connect an external wire or an LED light between them, the electrons zoom through the circuit loop to get from the zinc to the copper. <strong>This moving stream of electrons is electricity!</strong>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <div class="prediction-box">
-            <h3 style="color: #2b6cb0; margin-top: 0;">🧪 Test Your Knowledge!</h3>
-            <p style="color: #4a5568;">Based on how the chemical reactions function, do you think a larger lemon produces significantly more voltage than a small lemon?</p>
-            <button class="prediction-btn" onclick="revealResult('yes')">Yes, larger has more juice!</button>
-            <button class="prediction-btn" onclick="revealResult('no')">No, size doesn't change voltage.</button>
-            <p id="prediction-feedback" style="font-size: 1.1em; font-weight: bold; margin-top: 15px; min-height: 25px; transition: all 0.3s ease;"></p>
+        <div class="nav-bar">
+            <button id="btn-calculator" class="active" onclick="switchTab('calculatorTab', 'btn-calculator')">Calculator</button>
+            <button id="btn-learn" onclick="switchTab('learnTab', 'btn-learn')">Learn</button>
+            <button id="btn-fun" onclick="switchTab('funTab', 'btn-fun')">Quiz</button>
         </div>
 
-        <section id="results">
-            <h2>📊 Data & Results</h2>
-            <p>Our findings showed that adding more lemons directly scaled up the voltage. Below is the recorded voltage matrix from our digital multimeter readings:</p>
-            
-            <table style="width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left;">
-                <thead>
-                    <tr style="background-color: var(--primary-color); color: white;">
-                        <th style="padding: 12px; border: 1px solid #ddd;">Number of Lemons</th>
-                        <th style="padding: 12px; border: 1px solid #ddd;">Average Voltage Generated (V)</th>
-                        <th style="padding: 12px; border: 1px solid #ddd;">Can It Power an LED?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 12px; border: 1px solid #ddd;">1 Lemon</td>
-                        <td style="padding: 12px; border: 1px solid #ddd;">0.90 V</td>
-                        <td style="padding: 12px; border: 1px solid #ddd; color: #e53e3e; font-weight: bold;">❌ No</td>
-                    </tr>
-                    <tr style="background-color: #f7fafc;">
-                        <td style="padding: 12px; border: 1px solid #ddd;">2 Lemons</td>
-                        <td style="padding: 12px; border: 1px solid #ddd;">1.78 V</td>
-                        <td style="padding: 12px; border: 1px solid #ddd; color: #e53e3e; font-weight: bold;">❌ No</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 12px; border: 1px solid #ddd;">3 Lemons</td>
-                        <td style="padding: 12px; border: 1px solid #ddd;">2.65 V</td>
-                        <td style="padding: 12px; border: 1px solid #ddd; color: #38a169; font-weight: bold;">✔️ Yes (Dimly)</td>
-                    </tr>
-                    <tr style="background-color: #f7fafc;">
-                        <td style="padding: 12px; border: 1px solid #ddd;">4 Lemons</td>
-                        <td style="padding: 12px; border: 1px solid #ddd;">3.51 V</td>
-                        <td style="padding: 12px; border: 1px solid #ddd; color: #38a169; font-weight: bold;">✔️ Yes (Brightly)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div id="calculatorTab" class="section active">
+            <h3>Power Calculator</h3>
+            <p>Select a fruit cell to calculate its estimated energy output.</p>
+            <select id="fruitType">
+                <option value="0.91">Lemon Waste (0.91V)</option>
+                <option value="0.85">Pineapple Waste (0.85V)</option>
+                <option value="0.78">Orange Waste (0.78V)</option>
+                <option value="0.62">Potato Waste (0.62V)</option>
+            </select><br>
+            <input type="number" id="fruitCount" placeholder="Number of fruits (e.g., 3)" min="1"><br>
+            <button class="btn-main" onclick="calculateVoltage()">Calculate Voltage</button>
+            <div class="result-box">
+                <p>Total Estimated Voltage:</p>
+                <p id="voltageDisplay">0.00 V</p>
+                <p id="funFact">Enter a number to see the result.</p>
+            </div>
+        </div>
 
-        <section id="conclusion">
-            <h2>🏁 Conclusion</h2>
-            <p>Our experiment successfully validated the original hypothesis. A single lemon provides approximately 0.9 volts of electrical potential. While one lemon cannot produce enough power to bypass an LED's structural resistance barrier, combining 3 or more lemons in a series circuit stacks their voltages together seamlessly to power small electrical devices.</p>
-        </section>
+        <div id="learnTab" class="section">
+            <h3>The Science Behind It</h3>
+            
+            <div class="circuit-diagram">
+                Zinc Anode ---> Fruit Acid ---> Copper Cathode
+            </div>
+
+            <div class="info-card">
+                <strong>The Anode (Zinc Nail):</strong><br>
+                Zinc is a metal that gives away its electrons easily. When the acidic fruit juice touches the zinc nail, a chemical reaction starts. This reaction breaks down the zinc atoms, leaving behind negatively charged electrons.
+            </div>
+            
+            <div class="info-card">
+                <strong>The Electrolyte (Fruit Acid):</strong><br>
+                The natural juices in the fruit (like citric acid) act as an electrolyte. The acid's job is to conduct electricity and interact with the metals to keep the chemical reaction going.
+            </div>
+
+            <div class="info-card">
+                <strong>The Cathode (Copper Plate):</strong><br>
+                Copper strongly attracts electrons. Since the electrons are crowded on the zinc nail, they travel through our connecting wires to get to the copper plate, creating an electric current.
+            </div>
+
+            <div class="info-card">
+                <strong>The Circuit:</strong><br>
+                That continuous flow of electrons—moving from the Zinc, through the wires, and into the Copper—is exactly what electricity is. By connecting them, we turn chemical energy into electrical energy.
+            </div>
+        </div>
+
+        <div id="funTab" class="section">
+            <h3>Science Quiz</h3>
+            <p>Test your knowledge based on our project.</p>
+            
+            <div class="quiz-container" id="quizContainer">
+                <p id="questionText" class="quiz-question">Loading question...</p>
+                <div id="optionsContainer"></div>
+                <p id="quizFeedback" style="font-weight: bold; margin-top: 15px;"></p>
+            </div>
+        </div>
 
     </div>
 
-    <footer>
-        <p>© 2026 Science Fair Project Portfolio. Created with 🧪 and 🍋.</p>
-    </footer>
-
     <script>
-        function revealResult(userChoice) {
-            const feedback = document.getElementById('prediction-feedback');
-            if (userChoice === 'no') {
-                feedback.innerHTML = "🎉 Correct! Voltage depends strictly on the chemical properties of the Zinc and Copper metals, not the physical size of the lemon!";
-                feedback.style.color = "#38a169";
+        // Tab switching logic
+        function switchTab(tabId, btnId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(btnId).classList.add('active');
+        }
+
+        // Voltage calculator logic
+        function calculateVoltage() {
+            let fruitVoltage = parseFloat(document.getElementById("fruitType").value);
+            let count = parseInt(document.getElementById("fruitCount").value);
+
+            if (isNaN(count) || count <= 0) {
+                alert("Please enter a valid number of fruits!");
+                return;
+            }
+
+            let totalVoltage = (fruitVoltage * count).toFixed(2);
+            document.getElementById("voltageDisplay").innerText = totalVoltage + " Volts";
+
+            let factText = "";
+            if (fruitVoltage === 0.91) { factText = "Lemons produced the most power due to their high citric acid content."; }
+            else if (totalVoltage >= 2.0) { factText = "This is enough voltage to potentially light up a small standard red LED."; }
+            else { factText = "Connecting more fruit cells in a series will increase the total voltage."; }
+            
+            document.getElementById("funFact").innerText = factText;
+        }
+
+        // Quiz questions data
+        const quizData = [
+            {
+                question: "1. Which fruit generated the highest voltage during the experiment?",
+                options: ["Pineapple", "Lemon", "Orange", "Potato"],
+                correctAnswer: "Lemon"
+            },
+            {
+                question: "2. What internal part of the fruit acts as the 'Electrolyte'?",
+                options: ["The seeds", "The sugar", "The natural acids", "The skin"],
+                correctAnswer: "The natural acids"
+            },
+            {
+                question: "3. In our battery, which metal acts as the Anode (giving away electrons)?",
+                options: ["Copper", "Zinc", "Iron", "Gold"],
+                correctAnswer: "Zinc"
+            },
+            {
+                question: "4. What is the primary purpose of this sustainable project?",
+                options: ["To make fruit juice", "To get clean energy from waste", "To grow bigger lemons", "To invent a new metal"],
+                correctAnswer: "To get clean energy from waste"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuiz() {
+            const qData = quizData[currentQuestionIndex];
+            document.getElementById("questionText").innerText = qData.question;
+            document.getElementById("quizFeedback").innerText = "";
+            
+            const optionsContainer = document.getElementById("optionsContainer");
+            optionsContainer.innerHTML = ""; 
+
+            qData.options.forEach(option => {
+                let btn = document.createElement("button");
+                btn.innerText = option;
+                btn.className = "quiz-btn";
+                btn.onclick = () => checkAnswer(option, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedOption, buttonElement) {
+            const correctAnswer = quizData[currentQuestionIndex].correctAnswer;
+            const feedback = document.getElementById("quizFeedback");
+
+            if (selectedOption === correctAnswer) {
+                buttonElement.style.backgroundColor = "#4caf50";
+                buttonElement.style.color = "white";
+                feedback.innerText = "Correct! Loading next question...";
+                feedback.style.color = "green";
+                
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < quizData.length) {
+                        loadQuiz();
+                    } else {
+                        showWinnerScreen();
+                    }
+                }, 1200);
+
             } else {
-                feedback.innerHTML = "🔬 Good guess, but actually No! A bigger lemon gives more current capacity (amperage) over time, but the voltage depends entirely on the metals used.";
-                feedback.style.color = "#e53e3e";
+                feedback.innerText = "Incorrect. Please try again.";
+                feedback.style.color = "red";
             }
         }
+
+        function showWinnerScreen() {
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = `
+                <div class="winner-text">Quiz Complete!</div>
+                <p style="font-size: 16px; margin-top:10px;">You have successfully completed the Science Quiz. Thank you for learning about our project.</p>
+                <button class="btn-main" onclick="resetQuiz()">Restart Quiz</button>
+            `;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = `
+                <p id="questionText" class="quiz-question"></p>
+                <div id="optionsContainer"></div>
+                <p id="quizFeedback" style="font-weight: bold; margin-top: 15px;"></p>
+            `;
+            loadQuiz();
+        }
+
+        loadQuiz();
     </script>
+
 </body>
 </html>
